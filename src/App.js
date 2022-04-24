@@ -1,16 +1,27 @@
-import React from 'react'
-import Home from './Pages/Home/Home.js';
+import React, { useState, useEffect}  from 'react';
+import ArticlesContainer from './Components/ArticlesContainer/ArticlesContainer.js';
 import Error from './Pages/Error/Error.js';
 import Detail from './Pages/Detail/Detail.js';
 import { Route, Switch, Redirect } from 'react-router-dom';
+import { fetchAll } from './apiCalls.js'
+import { cleanData } from './utils.js'
 
 const App = () => {
+  const [articles, setArticles] = useState('')
+
+  useEffect(()=> {
+    fetchAll()
+      .then(data => cleanData(data.results))
+      .then(data => setArticles(data))
+  }, []);
+
   return (
     <main className='App'>
+    {!articles ? (<div> Loading...</div>) :(
     <Switch>
       <Route
         exact path='/'
-        render={() => <Home/>}
+        render={() => <ArticlesContainer articles={articles}/>}
       />
       <Route
         exact path='/article/:id'
@@ -20,6 +31,7 @@ const App = () => {
       <Route path='/error' component={Error}/>
       <Redirect to='/error'/>
     </Switch>
+  )}
   </main>
   )
 }
