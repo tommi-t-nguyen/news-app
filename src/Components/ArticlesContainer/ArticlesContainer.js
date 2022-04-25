@@ -6,7 +6,7 @@ const ArticlesContainer = ({articles}) => {
     return(
       <Card
         key={key}
-        id={article.key}
+        id={article.id}
         byline={article.byline}
         title= {article.title}
         image= {article.image}

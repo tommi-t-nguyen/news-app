@@ -1,5 +1,10 @@
 const cleanData = (data) => {
-  return data.map((article, index) => {
+  const newData = data.filter(article => {
+    if(article.multimedia){
+      return article
+    }
+  })
+  return newData.map((article, index) => {
     return {
       id: index,
       byline: article.byline,
