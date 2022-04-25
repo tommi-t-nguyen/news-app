@@ -1,8 +1,14 @@
 import React from 'react'
 
-const Detail = () => {
+const Detail = ({article}) => {
+  console.log(article)
   return (
-    <div>Detail</div>
+    <section className='article-details'>
+      <h2>{article.title}</h2>
+      <p>{article.byline}</p>
+      <img src={article.image}/>
+      <a href={article.url}>Link to article</a>
+    </section>
   )
 }
 

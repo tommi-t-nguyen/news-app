@@ -8,6 +8,7 @@ import { cleanData } from './utils.js'
 
 const App = () => {
   const [articles, setArticles] = useState('')
+  const [filteredArticles, setFilteredArticles] = useState('')
 
   useEffect(()=> {
     fetchAll()
@@ -15,18 +16,32 @@ const App = () => {
       .then(data => setArticles(data))
   }, []);
 
+  const selectArticle = (id) => {
+    return articles.find(article => article.id == id)
+  }
+
+  const getFilteredArticles = (inputValue) => {
+  let filteredArticles = articles.filter(article => article.title.toLowerCase().includes(inputValue.toLowerCase()))
+  setFilteredArticles([...filteredArticles])
+}
+
   return (
     <main className='App'>
     {!articles ? (<div> Loading...</div>) :(
     <Switch>
       <Route
         exact path='/'
-        render={() => <ArticlesContainer articles={articles}/>}
+        render={() => <ArticlesContainer articles={articles} filteredArticles={filteredArticles} getFilteredArticles={getFilteredArticles} />}
       />
       <Route
         exact path='/article/:id'
-        render={({match}) =>
-        <Detail id={match.params.id}/> }
+        render={({match}) => {
+          const currentArticle = selectArticle(match.params.id)
+          if(!currentArticle){
+            return <p>Loading...</p>
+          }
+          return <Detail article={currentArticle}/>
+        }}
       />
       <Route path='/error' component={Error}/>
       <Redirect to='/error'/>
