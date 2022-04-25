@@ -1,0 +1,15 @@
+img {
+  width: 30%;
+}
+
+.article-card{
+  margin: 5px;
+  padding: 5px;
+  border: 2px solid black ;
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+}
+a{
+  color: black;
+}

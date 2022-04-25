@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import Card from '../Card/Card.js'
+import './ArticlesContainer.css'
 
 const ArticlesContainer = ({ articles, filteredArticles, getFilteredArticles }) => {
   const [searchInput, setSearchInput] = useState('')

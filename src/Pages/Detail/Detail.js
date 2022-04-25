@@ -1,4 +1,6 @@
 import React from 'react'
+import './Detail.css'
+import { Link } from 'react-router-dom'
 
 const Detail = ({article}) => {
   console.log(article)
@@ -8,6 +10,7 @@ const Detail = ({article}) => {
       <p>{article.byline}</p>
       <img src={article.image}/>
       <a href={article.url}>Link to article</a>
+      <Link to={'/'}>Back Home</Link>
     </section>
   )
 }

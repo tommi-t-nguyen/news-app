@@ -1,10 +1,12 @@
 import React, { useState, useEffect}  from 'react';
 import ArticlesContainer from './Components/ArticlesContainer/ArticlesContainer.js';
+import Nav from './Components/Nav/Nav.js';
 import Error from './Pages/Error/Error.js';
 import Detail from './Pages/Detail/Detail.js';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { fetchAll } from './apiCalls.js'
-import { cleanData } from './utils.js'
+import { fetchAll } from './apiCalls.js';
+import { cleanData } from './utils.js';
+import './App.css';
 
 const App = () => {
   const [articles, setArticles] = useState('')
@@ -27,6 +29,7 @@ const App = () => {
 
   return (
     <main className='App'>
+    <Nav />
     {!articles ? (<div> Loading...</div>) :(
     <Switch>
       <Route
